@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-3xl mx-auto" data-aos="fade-up">
+  <h2 class="text-2xl font-bold mb-4 text-center text-indigo-600">✏️ Edit Placement</h2>
+  
+  <form method="POST" class="space-y-4 bg-gradient-to-r from-indigo-50 to-pink-50 p-6 rounded-2xl shadow-lg">
+    <!-- Company -->
+    <input name="company" value="{{ p.company }}" 
+           class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" 
+           placeholder="Company" required />
+
+    <!-- Role -->
+    <input name="role" value="{{ p.role }}" 
+           class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" 
+           placeholder="Role / Title" required />
+
+    <!-- Location -->
+    <input name="location" value="{{ p.location }}" 
+           class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" 
+           placeholder="Location" required />
+
+    <!-- Eligibility -->
+    <input name="eligibility" value="{{ p.eligibility or '' }}" 
+           class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" 
+           placeholder="Eligibility" />
+
+    <!-- Deadline -->
+    <input type="date" name="deadline" value="{{ p.deadline or '' }}" 
+           class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" 
+           placeholder="Deadline" />
+
+    <!-- Application Link -->
+    <input name="link" value="{{ p.link or '' }}" 
+           class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" 
+           placeholder="Application Link (https://...)" />
+
+    <!-- Description -->
+    <textarea name="description" rows="4" 
+              class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" 
+              placeholder="Description">{{ p.description }}</textarea>
+
+    <!-- Save Button -->
+    <div class="flex justify-center">
+      <button class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 transition-all duration-300">
+        💾 Save Changes
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block nav_options %}
+  <a href="/student_dashboard" class="hover:text-yellow-300 transition">Home</a>
+  <a href="/about" class="hover:text-yellow-300 transition">About</a>
+  <a href="/rate" class="hover:text-yellow-300 transition">Rate</a>
+  <a href="/logout" class="hover:text-yellow-300 transition">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto mt-10 p-6 rounded-xl shadow-lg animate-fadeIn 
+            bg-gradient-to-r from-blue-50 via-red to-blue-50">
+
+  <!-- Page Title -->
+  <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">
+    📝 Practice & Quiz
+  </h2>
+
+  <!-- ================= Mode Selection ================= -->
+  <div class="flex justify-center gap-6 mb-10">
+    <button id="mode-practice" class="mode-btn bg-blue-600">📚 Practice</button>
+    <button id="mode-quiz" class="mode-btn bg-yellow-600">🎯 Quiz</button>
+  </div>
+
+  <!-- ================= Category Buttons ================= -->
+  <div class="flex justify-center gap-4 mb-8 flex-wrap hidden" id="category-buttons">
+    <button data-type="coding" class="category-btn bg-blue-600">💻 Coding</button>
+    <button data-type="aptitude" class="category-btn bg-green-600">🔢 Aptitude</button>
+    <button data-type="reasoning" class="category-btn bg-purple-600">🧠 Reasoning</button>
+    <button data-type="interview" class="category-btn bg-pink-600">🎤 Interview</button>
+  </div>
+
+  <!-- ================= Practice Section ================= -->
+  <div id="practice-section" class="hidden">
+    <h3 class="text-xl font-semibold mb-4 text-gray-700">📚 Practice Questions</h3>
+    <div id="practice-questions" 
+         class="bg-gray-100 border rounded-lg p-5 shadow-inner text-gray-700 text-lg min-h-[100px]">
+    </div>
+  </div>
+
+  <!-- ================= Quiz Section ================= -->
+  <div id="quiz-section" class="hidden mt-12">
+    <h3 class="text-xl font-semibold mb-4 text-gray-700">🎯 Quiz Section</h3>
+    <form id="quiz-form" class="space-y-6"></form>
+    <button id="submit-quiz" 
+      class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition hidden">
+      Submit Quiz
+    </button>
+    <div id="quiz-result" class="mt-6 p-4 rounded-lg bg-gray-50 hidden"></div>
+  </div>
+</div>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn { animation: fadeIn 0.6s ease-in-out; }
+  .mode-btn, .category-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  .mode-btn:hover, .category-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+</style>
+
+<script src="{{ url_for('static', filename='js/practice.js') }}"></script>
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+<script src="{{ url_for('static', filename='js/questions_data.js') }}"></script>
+{% endblock %}

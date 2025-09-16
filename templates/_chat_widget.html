@@ -1,0 +1,64 @@
+<!-- templates/_chat_widget.html -->
+<div id="chatbot-widget" class="chatbot-widget">
+  <div class="chatbot-header">
+    <span>AI Assistant</span>
+    <button onclick="toggleChatbot()" class="chatbot-close">&times;</button>
+  </div>
+  <div id="chatbot-messages" class="chatbot-messages"></div>
+  <div class="chatbot-input">
+    <input type="text" id="chatbot-input" placeholder="Ask me about jobs, interviews, aptitude..." />
+    <button onclick="sendChatMessage()">Send</button>
+  </div>
+</div>
+
+<style>
+.chatbot-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  max-height: 450px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: none;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  z-index: 9999;
+}
+.chatbot-header {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+}
+.chatbot-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+.chatbot-input input {
+  flex: 1;
+  border: none;
+  padding: 8px;
+}
+.chatbot-input button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+}
+</style>
+
+<script src="{{ url_for('static', filename='js/chatbot_widget.js') }}"></script>

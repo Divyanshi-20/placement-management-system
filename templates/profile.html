@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block nav_options %}
+  <a href="/student_dashboard" class="hover:text-yellow-300 transition">Home</a>
+  <a href="/about" class="hover:text-yellow-300 transition">About</a>
+  <a href="/rate" class="hover:text-yellow-300 transition">Rate</a>
+  <a href="/logout" class="hover:text-yellow-300 transition">Logout</a>
+{% endblock %}
+
+{% block title %}Profile & Resume{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto mt-10 p-8 bg-gradient-to-r from-green-400 to-teal-500 rounded-2xl shadow-2xl animate__animated animate__fadeInUp">
+  <h2 class="text-3xl font-bold text-center text-white mb-6">👤 Profile & Resume</h2>
+
+  <form method="POST" enctype="multipart/form-data" class="space-y-6 bg-white rounded-xl p-6 shadow-lg">
+    
+    <!-- Profile Picture -->
+    <div class="flex items-center space-x-6">
+      <!-- Profile Picture -->
+<img src="{% if user.profile_pic %}{{ url_for('enhancements.uploaded_profile_pic', filename=user.profile_pic) }}{% else %}/static/images/default-avatar.png{% endif %}" 
+     alt="Profile Picture" class="w-24 h-24 rounded-full border shadow-lg">
+<input type="file" name="profile_pic" class="text-sm">
+    </div>
+
+    <!-- Username -->
+    <div>
+      <label class="block text-gray-700 font-semibold">Username</label>
+      <input type="text" name="username" value="{{ user.username }}" 
+             class="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-green-500">
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label class="block text-gray-700 font-semibold">Email</label>
+      <input type="email" name="email" value="{{ user.email }}" 
+             class="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-green-500">
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <label class="block text-gray-700 font-semibold">Phone</label>
+      <input type="text" name="phone" value="{{ user.phone or '' }}" 
+             class="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-green-500">
+    </div>
+
+    <!-- Skills -->
+    <div>
+      <label class="block text-gray-700 font-semibold">Skills</label>
+      <textarea name="skills" rows="3" class="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-green-500">{{ user.skills or '' }}</textarea>
+    </div>
+
+    <!-- Resume -->
+    <div>
+      <label class="block text-gray-700 font-semibold">Upload Resume</label>
+      <input type="file" name="resume" class="w-full">
+   <!-- Resume -->
+{% if user.resume %}
+  <p class="mt-2 text-sm">
+    📄 Current Resume: 
+    <a href="{{ url_for('enhancements.uploaded_resume', filename=user.resume) }}" target="_blank" class="text-green-600 hover:underline">
+      {{ user.resume }}
+    </a>
+  </p>
+{% endif %}
+
+    </div>
+
+    <!-- Save Button -->
+    <button type="submit" 
+            class="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold shadow-md transform hover:scale-105 transition">
+      💾 Save Changes
+    </button>
+  </form>
+</div>
+{% endblock %}

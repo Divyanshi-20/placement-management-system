@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg" data-aos="fade-up">
+  <h2 class="text-2xl font-bold text-indigo-600">{{ placement.company }} — {{ placement.title }}</h2>
+  <p class="text-gray-600 mt-2">{{ placement.description }}</p>
+  <p class="text-sm text-gray-500 mt-2">Eligibility: {{ placement.eligibility }}</p>
+  <p class="text-sm text-gray-500">Deadline: {{ placement.deadline }}</p>
+
+  {% if already %}
+    <div class="mt-4 p-3 bg-yellow-100 text-yellow-800 rounded">You already applied on {{ already.applied_at.strftime('%Y-%m-%d') }}</div>
+  {% else %}
+    <form method="POST" action="{{ url_for('apply', placement_id=placement.id) }}" class="mt-4">
+      <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded">Apply</button>
+    </form>
+  {% endif %}
+</div>
+{% endblock %}

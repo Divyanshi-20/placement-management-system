@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block nav_options %}
+  <a href="/student_dashboard" class="hover:text-yellow-300 transition">Home</a>
+  <a href="/about" class="hover:text-yellow-300 transition">About</a>
+  <a href="/rate" class="hover:text-yellow-300 transition">Rate</a>
+  <a href="/logout" class="hover:text-yellow-300 transition">Logout</a>
+{% endblock %}
+{% block title %}Placements{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-6 py-10">
+
+  <!-- Title -->
+  <h1 class="text-center text-5xl font-extrabold uppercase text-gray-800 mb-10 tracking-wide">
+    💼 Available Placements
+  </h1>
+
+  <!-- Search Section -->
+  <form method="GET" action="{{ url_for('enhancements.placements') }}"
+        class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
+    <input type="text" name="q"
+           placeholder="Job title, company, or skill"
+           value="{{ query }}"
+           class="w-72 px-4 py-3 text-lg border-2 border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+    <input type="text" name="location"
+           placeholder="Location"
+           value="{{ request.args.get('location','') }}"
+           class="w-64 px-4 py-3 text-lg border-2 border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+    <button type="submit"
+            class="px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow hover:bg-blue-700 transition">
+      🔍 Search
+    </button>
+  </form>
+
+  <!-- Jobs Grid -->
+  {% if jobs %}
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {% for j in jobs %}
+        <div class="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-xl transition">
+          <div>
+            <h2 class="text-xl font-bold text-blue-700 mb-2">{{ j.company }}</h2>
+            <h3 class="text-lg font-medium text-gray-800">{{ j.role }}</h3>
+            <p class="text-gray-600 text-md mt-2"><i class="bi bi-geo-alt-fill"></i> {{ j.location }}</p>
+            <p class="text-gray-500 text-sm mt-3 line-clamp-4">{{ j.description }}</p>
+          </div>
+
+          <div class="mt-4 flex justify-between items-center gap-2">
+            {% if j.link %}
+              <a href="{{ j.link }}" target="_blank"
+                 class="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition">
+                🌐 External Apply
+              </a>
+            {% endif %}
+
+            {% if j.applied %}
+              <button disabled
+                      class="px-4 py-2 bg-gray-400 text-white rounded-lg font-medium cursor-not-allowed">
+                ✅ Already Applied
+              </button>
+            {% else %}
+              <form method="POST" action="{{ url_for('enhancements.apply', pid=j.id) }}">
+                <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition">
+                  📝 Apply Here
+                </button>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-gray-500 text-lg mt-10">🚫 No placements found.</p>
+  {% endif %}
+
+</div>
+{% endblock %}

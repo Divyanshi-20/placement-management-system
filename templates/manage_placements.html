@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block nav_options %}
+  <a href="/admin_dashboard" class="hover:text-pink-400 transition-all duration-300 transform hover:scale-105">Home</a>
+  <a href="/about" class="hover:text-pink-400 transition-all duration-300 transform hover:scale-105">About</a>
+  <a href="/rate" class="hover:text-pink-400 transition-all duration-300 transform hover:scale-105">Rate</a>
+  <a href="/logout" class="hover:text-pink-400 transition-all duration-300 transform hover:scale-105">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div data-aos="fade-up" class="animate-fadeIn overflow-x-hidden">
+  <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-500 mb-6 text-center tracking-wide">
+    Manage Placements
+  </h2>
+
+  <!-- Add Placement Form -->
+  <div class="flex justify-center">
+    <form method="POST"
+          class="w-full max-w-2xl mb-8 grid grid-cols-1 md:grid-cols-2 gap-4 bg-gradient-to-r from-indigo-50 to-pink-50 p-6 rounded-2xl shadow-lg transition transform hover:shadow-xl duration-300">
+      <input name="company" placeholder="Company" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" required />
+      <input name="role" placeholder="Role / Title" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" required />
+      <input name="location" placeholder="Location" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" required />
+      <input name="eligibility" placeholder="Eligibility" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" />
+      <input type="date" name="deadline" placeholder="Deadline" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none transition" />
+      <textarea name="description" placeholder="Description" class="p-3 border rounded-lg md:col-span-2 focus:ring-2 focus:ring-indigo-400 outline-none transition"></textarea>
+      <input name="link" placeholder="Application Link (https://...)" class="p-3 border rounded-lg md:col-span-2 focus:ring-2 focus:ring-indigo-400 outline-none transition" />
+
+      <button class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg md:col-span-2 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+        ➕ Add Placement
+      </button>
+    </form>
+  </div>
+
+  <!-- Placement Cards -->
+  <div class="grid md:grid-cols-2 gap-6">
+    {% for p in placements %}
+      <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-105 duration-300 overflow-hidden" data-aos="fade-left">
+        <h3 class="font-extrabold text-xl text-indigo-600">{{ p.company }} — {{ p.role }}</h3>
+        <p class="text-sm text-gray-500 mt-1">📍 {{ p.location }}</p>
+        <p class="text-sm text-gray-500 mt-1">📅 Deadline: <span class="font-medium">{{ p.deadline or "N/A" }}</span></p>
+        <p class="text-gray-600 mt-2">
+          {{ p.description[:120] }}{% if p.description and p.description|length > 120 %}...{% endif %}
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a href="{{ url_for('enhancements.edit_placement', pid=p.id) }}" 
+             class="px-4 py-2 bg-yellow-400 text-gray-800 font-medium rounded-lg shadow hover:bg-yellow-500 hover:shadow-md transition-all duration-300">
+             ✏️ Edit
+          </a>
+          <form method="POST" action="{{ url_for('enhancements.delete_placement', pid=p.id) }}" onsubmit="return confirm('Delete placement?');">
+            <button class="px-4 py-2 bg-red-500 text-white font-medium rounded-lg shadow hover:bg-red-600 hover:shadow-md transition-all duration-300">
+              🗑️ Delete
+            </button>
+          </form>
+<a href="{{ url_for('enhancements.view_applications', pid=p.id) }}"
+   class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg shadow hover:bg-indigo-700 hover:shadow-md transition-all duration-300">
+   View Applications
+</a>
+
+          {% if p.link %}
+          <a href="{{ p.link }}" target="_blank"
+             class="px-4 py-2 bg-green-600 text-white font-medium rounded-lg shadow hover:bg-green-700 hover:shadow-md transition-all duration-300">
+             🌐 Apply
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    {% else %}
+      <p class="text-gray-500 text-center col-span-2 animate-pulse">🚀 No placements added yet. Start by adding one above!</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Small animation -->
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn { animation: fadeIn 0.8s ease-in-out; }
+  body { overflow-x: hidden; }
+</style>
+{% endblock %}

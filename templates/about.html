@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block nav_options %}
+ {% if session.get("role") == "admin" %}
+    <a href="{{ url_for('enhancements.admin_dashboard') }}">Home</a>
+  {% else %}
+    <a href="{{ url_for('enhancements.student_dashboard') }}">Home</a>
+  {% endif %}
+  <a href="/about" class="hover:text-emerald-600 transition">About</a>
+  <a href="/rate" class="hover:text-emerald-600 transition">Rate</a>
+  <a href="/logout" class="hover:text-emerald-600 transition">Logout</a>
+{% endblock %}
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-20 text-center animate__animated animate__fadeInUp">
+  <h1 class="text-4xl font-bold mb-6">About HireHub</h1>
+  <p class="text-lg text-gray-200 leading-relaxed">
+    HireHub is your one-stop placement portal. It helps <span class="font-semibold">students</span> explore
+    job opportunities, track applications, and prepare for interviews. It enables <span class="font-semibold">admins</span>
+    to manage placements, students, and reports with ease.
+  </p>
+  <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 rounded-xl shadow-lg">
+      🎓 <h3 class="text-xl font-bold mt-2">For Students</h3>
+      <p class="text-sm mt-2">Access placements, prepare for interviews, and build your career.</p>
+    </div>
+    <div class="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-6 rounded-xl shadow-lg">
+      🏢 <h3 class="text-xl font-bold mt-2">For Admins</h3>
+      <p class="text-sm mt-2">Easily manage students, placements, and analytics from one dashboard.</p>
+    </div>
+    <div class="bg-gradient-to-r from-purple-500 to-pink-600 text-white p-6 rounded-xl shadow-lg">
+      🚀 <h3 class="text-xl font-bold mt-2">Our Goal</h3>
+      <p class="text-sm mt-2">Bridge the gap between talent and opportunity efficiently.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

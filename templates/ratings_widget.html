@@ -1,0 +1,31 @@
+<div class="ratings-widget">
+  <h3>⭐ Ratings</h3>
+  <p>
+    Average: <span id="avg-rating">-</span>
+    (from <span id="total-ratings">0</span> users)
+  </p>
+  <ul id="recent-ratings"></ul>
+</div>
+
+<script>
+async function loadRatings() {
+  try {
+    const res = await fetch("/api/ratings_summary");
+    const data = await res.json();
+
+    document.getElementById("avg-rating").innerText = data.average;
+    document.getElementById("total-ratings").innerText = data.total;
+
+    const recent = document.getElementById("recent-ratings");
+    recent.innerHTML = "";
+    data.recent.forEach(r => {
+      const li = document.createElement("li");
+      li.innerText = `⭐ ${r.rating} - ${r.comment}`;
+      recent.appendChild(li);
+    });
+  } catch (e) {
+    console.error("Error loading ratings:", e);
+  }
+}
+loadRatings();
+</script>

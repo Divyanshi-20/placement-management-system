@@ -1,0 +1,21 @@
+# Core
+Flask==2.3.3
+Flask-Login==0.6.3
+Flask-WTF==1.1.1
+Werkzeug==2.3.7
+Jinja2==3.1.2
+
+# Resume Parsing
+pdfminer.six==20221105
+python-docx==0.8.11
+
+# Chatbot (optional, skip if not using GPT)
+openai==1.6.1
+python-dotenv==1.0.0
+
+# Extra
+requests==2.31.0
+openai>=1.0.0
+PyPDF2
+python-docx
+

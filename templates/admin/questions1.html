@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block nav_options %}
+  <a href="/admin_dashboard" class="hover:text-yellow-300 transition">Home</a>
+  <a href="/about" class="hover:text-yellow-300 transition">About</a>
+  <a href="/rate" class="hover:text-yellow-300 transition">Rate</a>
+  <a href="/reports" class="hover:text-yellow-300 transition">Reports</a>
+  <a href="/logout" class="hover:text-yellow-300 transition">Logout</a>
+{% endblock %}
+
+{% block title %}Admin Chatbot{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center mt-16 px-6 animate__animated animate__fadeIn">
+
+  <!-- Page Heading -->
+  <h1 class="text-3xl font-bold text-white mb-6 cursor-pointer transition transform hover:underline hover:scale-105">
+    🤖 Admin Chatbot Assistant
+  </h1>
+  <p class="text-gray-200 mb-10 text-lg text-center max-w-2xl">
+    Ask questions related to <span class="font-semibold">students, placements, applications, or reports</span>.  
+    The chatbot will assist you with professional insights and quick responses.
+  </p>
+
+  <!-- Chat Container -->
+  <div class="w-full max-w-4xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden flex flex-col h-[600px]">
+
+    <!-- Chat Messages -->
+    <div id="chat-box" class="flex-1 p-6 space-y-4 overflow-y-auto">
+      <!-- Example Messages -->
+      <div class="flex items-start space-x-3">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold">
+          A
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 p-4 rounded-xl shadow-md max-w-md">
+          Hello Admin! 👋 How can I help you today?
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Box -->
+    <div class="p-4 bg-gray-100 dark:bg-gray-900 border-t border-gray-300 dark:border-gray-700 flex items-center space-x-3">
+      <input id="user-input" type="text" placeholder="Type your question..."
+             class="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:bg-gray-800 dark:text-gray-100">
+      <button onclick="sendMessage()" 
+              class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:scale-105 transition">
+        Send
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Chatbot Script -->
+<script>
+  function sendMessage() {
+    const input = document.getElementById("user-input");
+    const message = input.value.trim();
+    if (!message) return;
+
+    const chatBox = document.getElementById("chat-box");
+
+    // Add user message
+    const userMsg = document.createElement("div");
+    userMsg.className = "flex items-start justify-end space-x-3";
+    userMsg.innerHTML = `
+      <div class="bg-indigo-500 text-white p-4 rounded-xl shadow-md max-w-md">
+        ${message}
+      </div>
+      <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white font-bold">
+        U
+      </div>
+    `;
+    chatBox.appendChild(userMsg);
+
+    // Auto-scroll
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Clear input
+    input.value = "";
+
+    // Simulate bot response
+    setTimeout(() => {
+      const botMsg = document.createElement("div");
+      botMsg.className = "flex items-start space-x-3";
+      botMsg.innerHTML = `
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold">
+          A
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 p-4 rounded-xl shadow-md max-w-md">
+          This is a placeholder response. (You can connect backend logic here!)
+        </div>
+      `;
+      chatBox.appendChild(botMsg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }, 800);
+  }
+</script>
+{% endblock %}

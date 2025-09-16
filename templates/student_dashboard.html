@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% block nav_options %}
+  <a href="/student_dashboard" class="hover:text-yellow-300 transition">Home</a>
+  <a href="/about" class="hover:text-yellow-300 transition">About</a>
+  <a href="/rate" class="hover:text-yellow-300 transition">Rate</a>
+  <a href="/logout" class="hover:text-yellow-300 transition">Logout</a>
+{% endblock %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="text-center animate__animated animate__bounceInDown">
+  <!-- Welcome Message -->
+  <h1 class="mt-16 text-4xl font-bold cursor-pointer transition transform hover:underline hover:scale-103">
+    Welcome back, {{ username }} 👋
+  </h1>
+
+  <!-- Motivation Message (typing once) -->
+  <p id="student-typing" class="mt-6 text-xl font-medium text-gray-100"></p>
+
+  <!-- Two-column layout -->
+  <div class="mt-16 grid md:grid-cols-2 gap-10 px-10 items-start">
+    <!-- Left Side (Cards) -->
+    <div class="grid grid-cols-1 gap-8">
+      <!-- Placements -->
+      <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 rounded-2xl shadow-lg transform transition hover:scale-105 hover:shadow-2xl animate__animated animate__zoomIn">
+        <h2 class="text-2xl font-bold mb-2">💼 Available Placements</h2>
+        <p class="text-sm">Explore the latest job postings tailored for you.</p>
+        <a href="/placements" class="inline-block mt-4 px-4 py-2 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition">View</a>
+      </div>
+      <!-- Applications -->
+      <div class="bg-gradient-to-r from-purple-500 to-pink-600 text-white p-6 rounded-2xl shadow-lg transform transition hover:scale-105 hover:shadow-2xl animate__animated animate__zoomIn animate__delay-1s">
+        <h2 class="text-2xl font-bold mb-2">📊 Application Status</h2>
+        <p class="text-sm">Track your applications and interview calls.</p>
+        <a href="/status" class="inline-block mt-4 px-4 py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition">Check</a>
+      </div>
+      <!-- Profile -->
+      <div class="bg-gradient-to-r from-green-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg transform transition hover:scale-105 hover:shadow-2xl animate__animated animate__zoomIn animate__delay-2s">
+        <h2 class="text-2xl font-bold mb-2">👤 Profile & Resume</h2>
+        <p class="text-sm">Update your profile and upload resumes.</p>
+        <a href="/profile" class="inline-block mt-4 px-4 py-2 bg-white text-green-600 rounded-lg font-semibold hover:bg-gray-100 transition">Edit</a>
+      </div>
+      <!-- Ask a Question -->
+      <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-6 rounded-2xl shadow-lg 
+                  transform transition hover:scale-105 hover:shadow-2xl animate__animated animate__zoomIn animate__delay-3s">
+        <h2 class="text-2xl font-bold mb-2">💬 Ask a Question</h2>
+        <p class="text-sm">Have queries about placements, interviews, or app features? Chat with us!</p>
+        <a href="/ask" 
+          class="inline-block mt-4 px-4 py-2 bg-white text-yellow-600 rounded-lg font-semibold hover:bg-gray-100 transition">
+          Go to Chat
+        </a>
+      </div>
+<!-- Resume ATS Checker -->
+<div class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white p-6 rounded-2xl shadow-lg 
+            transform transition hover:scale-105 hover:shadow-2xl animate__animated animate__zoomIn animate__delay-3s">
+  <h2 class="text-2xl font-bold mb-2">📄 Resume ATS Checker</h2>
+  <p class="text-sm">Check your resume with ATS</p>
+  <a href="/resume_review" 
+    class="inline-block mt-4 px-4 py-2 bg-white text-cyan-600 rounded-lg font-semibold hover:bg-gray-100 transition">
+    Check
+  </a>
+</div>
+
+<!-- Practice -->
+<div class="bg-gradient-to-r from-rose-500 to-red-600 text-white p-6 rounded-2xl shadow-lg 
+            transform transition hover:scale-105 hover:shadow-2xl animate__animated animate__zoomIn animate__delay-3s">
+  <h2 class="text-2xl font-bold mb-2">📝 Practice </h2>
+  <p class="text-sm">Take practice tests & quizzes</p>
+  <a href="/practice" 
+    class="inline-block mt-4 px-4 py-2 bg-white text-red-600 rounded-lg font-semibold hover:bg-gray-100 transition">
+    Quiz & Practice 
+  </a>
+</div>
+
+    </div>
+
+    <!-- Right Side (Two Slideshow Sections) -->
+    <div class="flex flex-col justify-center space-y-10">
+      <!-- First Slideshow Section -->
+      <div class="flex justify-center">
+        <img id="slideshow1" src="/static/images/student_dashboard.JPG" 
+             alt="Placement Illustration 1" 
+             class="w-4/5 animate__animated animate__fadeInRight rounded-xl shadow-lg">
+      </div>
+
+      <!-- Second Slideshow Section -->
+      <div class="flex justify-center">
+        <img id="slideshow2" src="/static/images/student_dashboard1.JPEG" 
+             alt="Placement Illustration 2" 
+             class="w-4/5 animate__animated animate__fadeInRight rounded-xl shadow-lg">
+      </div>
+       <!-- third Slideshow Section -->
+      <div class="flex justify-center">
+        <img id="slideshow3" src="/static/images/student_dashboard4.JPG" 
+             alt="Placement Illustration 3" 
+             class="w-4/5 animate__animated animate__fadeInRight rounded-xl shadow-lg">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chatbot Popup -->
+<div id="chatbot" class="hidden fixed bottom-20 right-10 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+  <div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 font-bold">
+    Student Assistant
+  </div>
+  <div class="h-64 p-4 overflow-y-auto text-sm" id="chat-content">
+    <p class="text-gray-500">👋 Hi! Ask me about the app queries and problems.</p>
+  </div>
+  <div class="flex border-t">
+    <input id="chat-input" type="text" placeholder="Type your question..."
+           class="flex-1 px-3 py-2 text-gray-700 dark:text-gray-100 bg-transparent focus:outline-none">
+    <button onclick="sendMessage()" 
+            class="px-4 text-indigo-500 font-bold hover:text-indigo-700">➤</button>
+  </div>
+</div>
+
+<!-- Floating Chat Button -->
+<button onclick="toggleChat()" 
+        class="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 
+               text-white text-2xl shadow-lg hover:scale-110 transition">💬</button>
+
+<!-- Typing Effect + Slideshow Script -->
+<script>
+  const studentText = "Your journey towards success starts here — explore opportunities, prepare well, and achieve big!";
+  let i = 0;
+  function typeStudent() {
+    if (i < studentText.length) {
+      document.getElementById("student-typing").innerHTML = studentText.substring(0, i + 1) + '<span class="border-r-2 border-yellow-400 animate-pulse"></span>';
+      i++;
+      setTimeout(typeStudent, 50);
+    }
+  }
+  window.onload = typeStudent;
+
+  function toggleChat() {
+    const chat = document.getElementById("chatbot");
+    chat.classList.toggle("hidden");
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("chat-input");
+    const content = document.getElementById("chat-content");
+    if (input.value.trim() !== "") {
+      const msg = document.createElement("p");
+      msg.className = "text-gray-800 dark:text-gray-200 mb-2";
+      msg.textContent = "🧑: " + input.value;
+      content.appendChild(msg);
+
+      // Placeholder bot response
+      const bot = document.createElement("p");
+      bot.className = "text-indigo-600 dark:text-indigo-400 mb-2";
+      bot.textContent = "🤖: I'll get back to you on '" + input.value + "'";
+      content.appendChild(bot);
+
+      content.scrollTop = content.scrollHeight;
+      input.value = "";
+    }
+  }
+
+  // First Slideshow
+  const images1 = [
+    "/static/images/student_dashboard.JPG",
+    "/static/images/student_dashboard1.JPEG",
+   
+  ];
+  let index1 = 0;
+  setInterval(() => {
+    index1 = (index1 + 1) % images1.length;
+    document.getElementById("slideshow1").src = images1[index1];
+  }, 4000);
+
+  // Second Slideshow
+  const images2 = [
+    "/static/images/student_dashboard2.WEBP",
+    "/static/images/student_dashboard3.JPG",
+   
+  ];
+  let index2 = 0;
+  setInterval(() => {
+    index2 = (index2 + 1) % images2.length;
+    document.getElementById("slideshow2").src = images2[index2];
+  }, 4000);
+ // third Slideshow
+  const images3 = [
+    "/static/images/student_dashboard4.JPG",
+    "/static/images/student_dashboard5.JPG",
+];
+ let index3 = 0;
+  setInterval(() => {
+    index3 = (index3 + 1) % images3.length;
+    document.getElementById("slideshow3").src = images3[index3];
+  }, 4000);
+</script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block nav_options %}
+  <a href="/admin_dashboard" class="hover:text-yellow-300 transition">Home</a>
+  <a href="/about" class="hover:text-yellow-300 transition">About</a>
+  <a href="/rate" class="hover:text-yellow-300 transition">Rate</a>
+  <a href="/logout" class="hover:text-yellow-300 transition">Logout</a>
+{% endblock %}
+
+{% block title %}Manage Students{% endblock %}
+
+{% block content %}
+<div class="text-center mt-20">
+  <h1 class="text-3xl font-bold text-indigo-600">👩‍🎓 Total Students</h1>
+  <p class="mt-4 text-gray-200">
+    Here the admin can view all registered students.
+    Total: <span class="font-bold text-yellow-300">{{ students|length }}</span>
+  </p>
+
+  <!-- Student Table -->
+  <div class="mt-8 overflow-x-auto">
+    <table class="min-w-full bg-white/10 rounded-lg shadow-lg text-left">
+      <thead>
+        <tr class="bg-indigo-600 text-white">
+          <th class="px-4 py-2">#</th>
+          <th class="px-4 py-2">Email</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-100">
+        {% for student in students %}
+        <tr class="border-b border-gray-700 hover:bg-white/5">
+          <td class="px-4 py-2">{{ loop.index }}</td>
+          <td class="px-4 py-2">{{ student['email'] }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="2" class="px-4 py-6 text-center text-gray-400">
+            No students found.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

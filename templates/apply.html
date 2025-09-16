@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block nav_options %} <a href="/student_dashboard" class="hover:text-yellow-300 transition">Home</a> <a href="/about" class="hover:text-yellow-300 transition">About</a> <a href="/rate" class="hover:text-yellow-300 transition">Rate</a> <a href="/logout" class="hover:text-yellow-300 transition">Logout</a> {% endblock %}
+{% block content %}
+<div class="container mx-auto p-6">
+  <h2 class="text-2xl font-bold mb-6">📑 Apply for Placement</h2>
+
+  <div class="bg-white p-6 rounded-xl shadow-md">
+    <h3 class="text-xl font-semibold">{{ placement.company_name }}</h3>
+    <p><strong>Role:</strong> {{ placement.role }}</p>
+    <p><strong>Eligibility:</strong> {{ placement.eligibility }}</p>
+    <p><strong>Deadline:</strong> {{ placement.deadline }}</p>
+
+    <form method="POST" action="{{ url_for('apply', placement_id=placement.id) }}" class="mt-4">
+      <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+        Confirm Application
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div data-aos="fade-up">
+  <h2 class="text-2xl font-bold text-indigo-600 mb-4">
+    Applications for {{ placement.company }} — {{ placement.role }}
+  </h2>
+
+  <div class="space-y-4">
+    {% for a in applications %}
+      <div class="bg-white p-4 rounded shadow flex justify-between items-center">
+        <div>
+          <div class="font-bold">{{ a.username }} ({{ a.email }})</div>
+          <div class="text-sm text-gray-500">Applied: {{ a.applied_at }}</div>
+
+          {% if a.resume %}
+            <a href="{{ url_for('uploaded_file', filename=a.resume) }}" 
+               target="_blank" 
+               class="text-sm text-green-600">
+              View resume
+            </a>
+          {% endif %}
+
+          <div class="text-sm text-blue-600">
+            Status: {{ a.status }}
+          </div>
+        </div>
+
+        <!-- Update Status Form -->
+        <form method="POST" 
+              action="{{ url_for('enhancements.update_status', app_id=a.id) }}" 
+              class="flex items-center gap-2">
+          <select name="status" class="p-2 border rounded">
+            {% for s in ['Applied','Shortlisted','Selected','Rejected'] %}
+              <option value="{{ s }}" {% if a.status == s %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+          </select>
+          <button class="px-3 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+            Update
+          </button>
+        </form>
+      </div>
+    {% else %}
+      <p class="text-gray-500 italic">No applications yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

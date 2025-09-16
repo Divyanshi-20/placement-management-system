@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="flex flex-col items-center justify-center text-center min-h-[90vh] px-6 
+                bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 dark:from-indigo-500 dark:to-purple-600 
+                text-white rounded-b-3xl shadow-lg">
+  
+<!-- Hero Illustration / Image -->
+<section class="flex justify-center mt-12">
+  <img src="{{ url_for('static', filename='images/placement.png') }}" 
+       alt="Placement Portal" 
+       class="w-full max-w-3xl animate__animated animate__fadeInUp">
+</section>
+
+
+  <!-- Welcome Title -->
+  <h1 class="text-5xl md:text-7xl font-extrabold mb-6 transition transform hover:scale-105">
+    Welcome to HireHub
+  </h1>
+
+  <!-- Encouragement Message -->
+  <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+    Unlock opportunities, track applications, and grow your career with our placement portal.
+  </p>
+
+  <!-- Buttons -->
+  <div class="flex flex-col sm:flex-row gap-4 justify-center">
+    <a href="{{ url_for('enhancements.register') }}" 
+       class="px-8 py-3 bg-purple-800 hover:bg-purple-900 text-white rounded-xl shadow-lg 
+              transform hover:scale-105 transition">
+      Register
+    </a>
+    <a href="{{ url_for('enhancements.login') }}"
+       class="px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-lg 
+              transform hover:scale-105 transition">
+      Login
+    </a>
+  </div>
+</section>
+
+
+{% endblock %}

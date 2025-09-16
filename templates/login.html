@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-(50) px-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 w-full max-w-4xl rounded-2xl shadow-xl
+              bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg animate__animated animate__fadeInLeft">
+    
+    <!-- Left: Login Form -->
+    <div class="p-8 flex flex-col justify-center">
+      <h2 class="text-3xl font-bold mb-6 text-center">Login</h2>
+      <form method="POST" action="{{ url_for('enhancements.login') }}" class="space-y-4">
+        <input type="email" name="email" placeholder="Email" required
+               class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 
+                      focus:ring-2 focus:ring-emerald-400 outline-none">
+        <input type="password" name="password" placeholder="Password" required
+               class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 
+                      focus:ring-2 focus:ring-emerald-400 outline-none">
+        <button type="submit" 
+                class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow-md
+                       transform transition hover:scale-105">
+          Login
+        </button>
+      </form>
+      <p class="text-sm mt-4 text-center">
+        Don’t have an account? 
+        <a href="{{ url_for('enhancements.register') }}" class="text-emerald-600 hover:underline">Register</a>
+      </p>
+    </div>
+
+    <!-- Right: Illustration -->
+    <div class="hidden md:flex items-center justify-center p-6 bg-gradient-to-br from-emerald-500/30 to-teal-500/30 
+                rounded-r-2xl">
+      <img src="{{ url_for('static', filename='images/login.jpg') }}" 
+           alt="Login Illustration" class="max-w-sm animate__animated animate__fadeInUp">
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block nav_options %}
+  <a href="/student_dashboard" class="px-3 py-2 rounded-lg hover:bg-orange-400 hover:text-white transition">Home</a>
+  <a href="/about" class="px-3 py-2 rounded-lg hover:bg-orange-400 hover:text-white transition">About</a>
+  <a href="/rate" class="px-3 py-2 rounded-lg hover:bg-orange-400 hover:text-white transition">Rate</a>
+  <a href="/logout" class="px-3 py-2 rounded-lg hover:bg-red-500 hover:text-white transition">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto mt-10 bg-gradient-to-br from-orange-50 via-emerald-50 to-teal-50 
+            p-10 rounded-2xl shadow-xl border border-orange-200">
+  
+  <!-- Heading -->
+  <h2 class="text-3xl font-extrabold text-teal-700 mb-6 text-center">
+    Resume ATS Checker
+  </h2>
+
+  <!-- Form -->
+  <form id="resume-form" enctype="multipart/form-data" class="space-y-6">
+    <input type="hidden" name="user_id" value="{{ session.get('user_id', '') }}">
+
+    <!-- File upload -->
+    <div>
+      <label class="block text-teal-800 font-semibold mb-2">Upload Resume</label>
+      <input type="file" name="resume" accept=".pdf,.docx,.txt"
+             class="w-full border border-teal-300 rounded-lg p-3 
+                    focus:ring-2 focus:ring-orange-400 focus:outline-none bg-white" required>
+      <p class="text-sm text-teal-600 mt-1">Accepted formats: PDF, DOCX, TXT</p>
+    </div>
+
+    <!-- Submit button -->
+    <div class="flex justify-center">
+      <button type="submit"
+              class="bg-orange-500 text-white font-semibold px-6 py-3 rounded-lg 
+                     hover:bg-orange-600 transition duration-200 shadow-md">
+        Check Resume
+      </button>
+    </div>
+  </form>
+
+  <!-- Result Section -->
+  <div id="resume-result" class="mt-8 hidden p-6 
+              bg-white border border-teal-200 rounded-lg shadow-md text-teal-800">
+  </div>
+</div>
+
+<!-- Script -->
+<script src="{{ url_for('static', filename='js/resume_uploader.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block nav_options %}
+  <a href="{{ url_for('enhancements.admin_dashboard') }}" class="hover:text-yellow-300 transition">Home</a>
+  <a href="{{ url_for('enhancements.about') }}" class="hover:text-yellow-300 transition">About</a>
+  <a href="{{ url_for('enhancements.rate') }}" class="hover:text-yellow-300 transition">Rate</a>
+  <a href="{{ url_for('enhancements.logout') }}" class="hover:text-yellow-300 transition">Logout</a>
+{% endblock %}
+
+{% block title %}Manage Students{% endblock %}
+
+{% block content %}
+<div data-aos="fade-up" class="mt-20 max-w-5xl mx-auto">
+  <h2 class="text-3xl font-bold text-indigo-600 mb-6 text-center">👩‍🎓 Manage Students</h2>
+
+  <!-- Add Student Button -->
+  <div class="flex justify-end mb-4">
+    <a href="{{ url_for('enhancements.admin_students') }}" 
+       class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 transition">
+       ➕ Add Student
+    </a>
+  </div>
+
+  <!-- Students Table -->
+  <div class="overflow-x-auto bg-white/10 p-6 rounded-lg shadow-lg">
+    {% if students %}
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="bg-indigo-600 text-white">
+          <th class="px-4 py-2">#</th>
+          <th class="px-4 py-2">Name</th>
+          <th class="px-4 py-2">Email</th>
+          <th class="px-4 py-2">Resumes</th>
+          <th class="px-4 py-2">Applications</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-100">
+        {% for s in students %}
+        <tr class="border-b border-gray-700 hover:bg-white/5">
+          <td class="px-4 py-2">{{ loop.index }}</td>
+          <td class="px-4 py-2">{{ s['username'] }}</td>
+          <td class="px-4 py-2">{{ s['email'] }}</td>
+          <td class="px-4 py-2">
+            <a href="{{ url_for('enhancements.student_resumes', student_id=s['id']) }}" 
+   class="text-blue-900 hover:underline">View</a>
+
+          </td>
+          <td class="px-4 py-2">
+            <a href="{{ url_for('enhancements.student_applications', student_id=s['id']) }}" class="text-green-900 hover:underline">History</a>
+          </td>
+         <td>
+<a href="{{ url_for('enhancements.edit_student', student_id=s['id']) }}" 
+   class="text-yellow-800 hover:underline">Edit</a> |
+
+<a href="{{ url_for('enhancements.delete_student', student_id=s['id']) }}" 
+   class="text-red-900 hover:underline"
+   onclick="return confirm('Are you sure you want to remove this student?');">
+   Remove
+</a>
+
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p class="text-gray-300">No students found.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
