@@ -8,6 +8,7 @@ Jinja2==3.1.2
 # Resume Parsing
 pdfminer.six==20221105
 python-docx==0.8.11
+PyPDF2==3.0.1
 
 # Chatbot (optional, skip if not using GPT)
 openai==1.6.1
@@ -15,7 +16,6 @@ python-dotenv==1.0.0
 
 # Extra
 requests==2.31.0
-openai>=1.0.0
-PyPDF2
-python-docx
 
+# Deployment
+gunicorn==21.2.0
