@@ -22,7 +22,7 @@ proxy_url = os.getenv("HTTP_PROXY")  # or whatever env var you use
 http_client = httpx.Client(proxies=proxy_url) if proxy_url else httpx.Client()
 
 client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
+    api_key=os.getenv("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"),
     http_client=http_client
 )
 
@@ -836,5 +836,6 @@ def settings():
 def status():
 
     return render_template("status.html")            
+
 
 
