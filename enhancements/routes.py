@@ -3,7 +3,8 @@ import os
 import json
 import sqlite3
 from datetime import datetime
-from openai import OpenAI  
+from openai import OpenAI 
+import httpx
 
 from flask import (
     Blueprint, request, jsonify, render_template,
@@ -823,4 +824,5 @@ def settings():
 
 @enhancements_bp.route("/status")
 def status():
+
     return render_template("status.html")            
