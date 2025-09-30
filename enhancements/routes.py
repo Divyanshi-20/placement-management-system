@@ -16,7 +16,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .api_jobs import fetch_api_jobs
 from .resume_checker import analyze_resume
 from .db import get_db_conn  # ✅ central db helpers
- client = OpenAI(api_key="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")
+def init_app(app):
+    client = OpenAI(api_key="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")
+    return client
 
 # ----------------- Blueprint -----------------
 enhancements_bp = Blueprint("enhancements", __name__, template_folder="../templates")
@@ -827,6 +829,7 @@ def settings():
 def status():
 
     return render_template("status.html")            
+
 
 
 
