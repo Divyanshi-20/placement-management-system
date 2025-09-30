@@ -4,7 +4,7 @@ import json
 import sqlite3
 from datetime import datetime
 from openai import OpenAI 
-import httpx
+
 
 from flask import (
     Blueprint, request, jsonify, render_template,
@@ -16,15 +16,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .api_jobs import fetch_api_jobs
 from .resume_checker import analyze_resume
 from .db import get_db_conn  # ✅ central db helpers
- 
-
-proxy_url = os.getenv("HTTP_PROXY")  # or whatever env var you use
-http_client = httpx.Client(proxies=proxy_url) if proxy_url else httpx.Client()
-
-client = OpenAI(
-    api_key=os.getenv("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"),
-    http_client=http_client
-)
+ client = OpenAI(api_key="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")
 
 
 # ----------------- Blueprint -----------------
@@ -836,6 +828,7 @@ def settings():
 def status():
 
     return render_template("status.html")            
+
 
 
 
