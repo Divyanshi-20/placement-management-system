@@ -18,8 +18,13 @@ from .resume_checker import analyze_resume
 from .db import get_db_conn  # ✅ central db helpers
  
 
-http_client = httpx.Client(proxies="http://your-proxy:port")
-client = OpenAI(api_key="...", http_client=http_client)
+proxy_url = os.getenv("HTTP_PROXY")  # or whatever env var you use
+http_client = httpx.Client(proxies=proxy_url) if proxy_url else httpx.Client()
+
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    http_client=http_client
+)
 
 
 # ----------------- Blueprint -----------------
@@ -831,4 +836,5 @@ def settings():
 def status():
 
     return render_template("status.html")            
+
 
