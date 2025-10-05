@@ -70,6 +70,10 @@ CREATE TABLE IF NOT EXISTS ratings (
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     cur = conn.cursor()
+    cur.execute("ALTER TABLE users ADD COLUMN phone TEXT;")
+    conn.commit()
+    conn.close()
+    print("✅ Added phone column successfully!")
     cur.executescript(schema)
     conn.commit()
     conn.close()
@@ -77,3 +81,4 @@ def init_db():
 
 if __name__ == "__main__":
     init_db()
+
