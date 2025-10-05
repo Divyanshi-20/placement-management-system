@@ -28,12 +28,7 @@
         <p class="text-sm">Explore the latest job postings tailored for you.</p>
         <a href="/placements" class="inline-block mt-4 px-4 py-2 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition">View</a>
       </div>
-      <!-- Applications -->
-      <div class="bg-gradient-to-r from-purple-500 to-pink-600 text-white p-6 rounded-2xl shadow-lg transform transition hover:scale-105 hover:shadow-2xl animate__animated animate__zoomIn animate__delay-1s">
-        <h2 class="text-2xl font-bold mb-2">📊 Application Status</h2>
-        <p class="text-sm">Track your applications and interview calls.</p>
-        <a href="/status" class="inline-block mt-4 px-4 py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition">Check</a>
-      </div>
+    
       <!-- Profile -->
       <div class="bg-gradient-to-r from-green-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg transform transition hover:scale-105 hover:shadow-2xl animate__animated animate__zoomIn animate__delay-2s">
         <h2 class="text-2xl font-bold mb-2">👤 Profile & Resume</h2>
@@ -78,20 +73,20 @@
     <div class="flex flex-col justify-center space-y-10">
       <!-- First Slideshow Section -->
       <div class="flex justify-center">
-        <img id="slideshow1" src="/static/images/student_dashboard.JPG" 
+        <img id="slideshow1" src="{{ url_for('static', filename='images/student_dashboard.jpg') }}"
              alt="Placement Illustration 1" 
              class="w-4/5 animate__animated animate__fadeInRight rounded-xl shadow-lg">
       </div>
 
       <!-- Second Slideshow Section -->
       <div class="flex justify-center">
-        <img id="slideshow2" src="/static/images/student_dashboard1.JPEG" 
+        <img id="slideshow2" src="{{ url_for('static', filename='images/student_dashboard1.jpeg') }}"
              alt="Placement Illustration 2" 
              class="w-4/5 animate__animated animate__fadeInRight rounded-xl shadow-lg">
       </div>
        <!-- third Slideshow Section -->
       <div class="flex justify-center">
-        <img id="slideshow3" src="/static/images/student_dashboard4.JPG" 
+        <img id="slideshow3" src="{{ url_for('static', filename='images/student_dashboard4.jpeg') }}"
              alt="Placement Illustration 3" 
              class="w-4/5 animate__animated animate__fadeInRight rounded-xl shadow-lg">
       </div>
@@ -193,3 +188,4 @@
   }, 4000);
 </script>
 {% endblock %}
+
