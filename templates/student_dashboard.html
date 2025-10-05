@@ -154,38 +154,43 @@
   }
 
   // First Slideshow
+<script>
   const images1 = [
-    "/static/images/student_dashboard.JPG",
-    "/static/images/student_dashboard1.JPEG",
-   
+    "{{ url_for('static', filename='images/student_dashboard.jpg') }}",
+    "{{ url_for('static', filename='images/student_dashboard1.jpeg') }}"
   ];
+
   let index1 = 0;
+
   setInterval(() => {
     index1 = (index1 + 1) % images1.length;
     document.getElementById("slideshow1").src = images1[index1];
   }, 4000);
 
   // Second Slideshow
+  <script>
   const images2 = [
-    "/static/images/student_dashboard2.WEBP",
-    "/static/images/student_dashboard3.JPG",
-   
+    "{{ url_for('static', filename='images/student_dashboard2.webp') }}",
+    "{{ url_for('static', filename='images/student_dashboard3.jpg') }}"
   ];
+
   let index2 = 0;
   setInterval(() => {
     index2 = (index2 + 1) % images2.length;
     document.getElementById("slideshow2").src = images2[index2];
   }, 4000);
  // third Slideshow
-  const images3 = [
-    "/static/images/student_dashboard4.JPG",
-    "/static/images/student_dashboard5.JPG",
-];
- let index3 = 0;
+const images3 = [
+    "{{ url_for('static', filename='images/student_dashboard4.jpg') }}",
+    "{{ url_for('static', filename='images/student_dashboard5.jpg') }}"
+  ];
+
+  let index3 = 0;
   setInterval(() => {
     index3 = (index3 + 1) % images3.length;
     document.getElementById("slideshow3").src = images3[index3];
   }, 4000);
 </script>
 {% endblock %}
+
 
