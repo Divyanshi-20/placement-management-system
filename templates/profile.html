@@ -16,10 +16,9 @@
     
     <!-- Profile Picture -->
     <div class="flex items-center space-x-6">
-      <!-- Profile Picture -->
-<img src="{% if user.profile_pic %}{{ url_for('enhancements.uploaded_profile_pic', filename=user.profile_pic) }}{% else %}/static/images/default-avatar.png{% endif %}" 
-     alt="Profile Picture" class="w-24 h-24 rounded-full border shadow-lg">
-<input type="file" name="profile_pic" class="text-sm">
+      <img src="{% if user.profile_pic %}{{ url_for('enhancements.uploaded_profile_pic', filename=user.profile_pic) }}{% else %}/static/images/default-avatar.png{% endif %}" 
+           alt="Profile Picture" class="w-24 h-24 rounded-full border shadow-lg">
+      <input type="file" name="profile_pic" class="text-sm">
     </div>
 
     <!-- Username -->
@@ -36,7 +35,13 @@
              class="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-green-500">
     </div>
 
-   
+    <!-- 📞 Phone -->
+    <div>
+      <label class="block text-gray-700 font-semibold">Phone</label>
+      <input type="text" name="phone" value="{{ user.phone or '' }}" 
+             placeholder="Enter your phone number"
+             class="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-green-500">
+    </div>
 
     <!-- Skills -->
     <div>
@@ -48,16 +53,14 @@
     <div>
       <label class="block text-gray-700 font-semibold">Upload Resume</label>
       <input type="file" name="resume" class="w-full">
-   <!-- Resume -->
-{% if user.resume %}
-  <p class="mt-2 text-sm">
-    📄 Current Resume: 
-    <a href="{{ url_for('enhancements.uploaded_resume', filename=user.resume) }}" target="_blank" class="text-green-600 hover:underline">
-      {{ user.resume }}
-    </a>
-  </p>
-{% endif %}
-
+      {% if user.resume %}
+      <p class="mt-2 text-sm">
+        📄 Current Resume: 
+        <a href="{{ url_for('enhancements.uploaded_resume', filename=user.resume) }}" target="_blank" class="text-green-600 hover:underline">
+          {{ user.resume }}
+        </a>
+      </p>
+      {% endif %}
     </div>
 
     <!-- Save Button -->
@@ -68,4 +71,3 @@
   </form>
 </div>
 {% endblock %}
-
