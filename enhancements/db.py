@@ -22,6 +22,17 @@ def init_db():
     """
     db = get_db_conn()
     cur = db.cursor()
+        # --- Add missing columns to users if needed ---
+    cur.execute("PRAGMA table_info(users)")
+    user_columns = [row["name"] for row in cur.fetchall()]
+    if "phone" not in user_columns:
+        cur.execute("ALTER TABLE users ADD COLUMN phone TEXT")
+    if "skills" not in user_columns:
+        cur.execute("ALTER TABLE users ADD COLUMN skills TEXT")
+    if "profile_pic" not in user_columns:
+        cur.execute("ALTER TABLE users ADD COLUMN profile_pic TEXT")
+    if "resume" not in user_columns:
+        cur.execute("ALTER TABLE users ADD COLUMN resume TEXT")
 
     # Create tables if not exist
     cur.executescript("""
@@ -113,3 +124,4 @@ def init_db():
         """)
 
     db.commit()
+
